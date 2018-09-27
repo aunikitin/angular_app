@@ -1,7 +1,0 @@
-{
-    "name": "node_app",
-    "version": "0.0.0",
-    "dependencies": {
-        "pg": "^7.4.3"
-    }
-}
