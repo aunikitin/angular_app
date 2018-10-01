@@ -1,7 +1,31 @@
 {
     "name": "node_app",
     "version": "0.0.0",
+    "scripts": {
+        "dev": "webpack-dev-server --hot --open",
+        "build": "webpack"
+    },
     "dependencies": {
-        "pg": "^7.4.3"
+        "@angular/common": "^6.1.8",
+        "@angular/compiler": "^6.1.8",
+        "@angular/core": "^6.1.8",
+        "@angular/forms": "^6.1.8",
+        "@angular/platform-browser": "^6.1.8",
+        "@angular/platform-browser-dynamic": "^6.1.8",
+        "@angular/router": "^6.1.8",
+        "@types/angular": "^1.6.51",
+        "core-js": "^2.5.7",
+        "rxjs": "^6.3.3",
+        "typescript": "^3.0.3",
+        "webpack": "^4.20.2",
+        "webpack-dev-server": "^3.1.9",
+        "zone.js": "^0.8.26"
+    },
+    "devDependencies": {
+        "@types/node": "^10.11.0",
+        "angular2-template-loader": "^0.6.2",
+        "awesome-typescript-loader": "^5.2.1",
+        "typescript": "^2.9.2",
+        "webpack-cli": "^3.1.1"
     }
 }
