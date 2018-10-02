@@ -14,8 +14,7 @@ export class AppComponent {
         { purchase: "Сыр", done: false, price:310 }
     ];
 
-    userName = this.items[0].purchase;
-    userAge = -1;
+    name = "Scott"
 
     addItem(text: string, price: number): void {  
         if(text==null || text.trim()=="" || price==null)

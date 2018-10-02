@@ -6,8 +6,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     styles: [`h2, p {color:red;}`]
 })
 export class ChildComponent{ 
-    @Output() onChanged = new EventEmitter<boolean>();
-    change(increased:any) {
-        this.onChanged.emit(increased);
+    @Input() userName:string;
+    @Output() userNameChange = new EventEmitter<string>();
+    onNameChange(model: string){      
+        this.userName = model;
+        this.userNameChange.emit(model);
     }
 }
