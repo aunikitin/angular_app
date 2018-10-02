@@ -2,3 +2,4 @@ node_modules
 workspace.code-workspace
 public
 launch.json
+.vscode
