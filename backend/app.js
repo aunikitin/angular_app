@@ -4,12 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-var connect = require('./api/connect')
+var dataController = require('./controllers/dataController');
+var connectionController = require('./controllers/connectionController');
 
 var app = express();
 
 app.set('port', 8080);
 
+app.use(router);
 app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
@@ -32,10 +34,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// Send all other requests to the Angular app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'));
-});
-app.post('/api/connectToDb', connect.connectToDb);
+
 
 module.exports = app;
