@@ -3,7 +3,8 @@
     "version": "0.0.0",
     "scripts": {
         "dev": "webpack-dev-server --hot --open",
-        "build": "webpack"
+        "build": "webpack",
+        "start": "npm run build | node backend/server.js"
     },
     "dependencies": {
         "@angular/common": "^6.1.8",
@@ -14,8 +15,18 @@
         "@angular/platform-browser-dynamic": "^6.1.8",
         "@angular/router": "^6.1.8",
         "@types/angular": "^1.6.51",
+        "cookie-parser": "^1.4.3",
         "core-js": "^2.5.7",
+        "cors": "^2.8.4",
+        "express": "^4.16.3",
+        "http-errors": "^1.7.1",
+        "mime": "^2.3.1",
+        "morgan": "^1.9.1",
+        "pg": "^7.4.3",
+        "pg-hstore": "^2.3.2",
         "rxjs": "^6.3.3",
+        "sequelize": "^4.39.0",
+        "supervisor": "^0.12.0",
         "typescript": "^3.0.3",
         "webpack": "^4.20.2",
         "webpack-dev-server": "^3.1.9",

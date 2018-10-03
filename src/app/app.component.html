@@ -1,0 +1,36 @@
+<div class="panel">
+    <div class="form-inline">
+        <div class="form-group">
+            <div class="col-md-8">
+                <input class="form-control" [(ngModel)]="host" placeholder = "Хост" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                <input type="text" class="form-control" [(ngModel)]="port" placeholder="Порт" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                <input type="text" class="form-control" [(ngModel)]="username" placeholder="Имя пользователя" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <input type="password" class="form-control" [(ngModel)]="password" placeholder="Пароль" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <input type="text" class="form-control" [(ngModel)]="dbname" placeholder="Наименование БД" />
+            </div>
+        </div>
+    </div>
+    <div class ="form-inline">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <button class="btn btn-default" (click)="connect()">Подключиться</button>
+            </div>
+        </div>
+    </div>
+</div>
