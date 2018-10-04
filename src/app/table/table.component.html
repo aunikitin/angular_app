@@ -1,1 +1,16 @@
-<input [ngModel]="userName" (ngModelChange)="onNameChange($event)" />
+<div *ngIf="done">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>identifier</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let vulnerability of receivedData">
+                <td>{{vulnerability.id}}</td>
+                <td>{{vulnerability.identifier}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

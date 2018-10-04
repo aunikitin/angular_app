@@ -1,14 +1,16 @@
-var ConnectionManager = require('../db/connectionManager');
-var express = require('express');
-var router = express.Router();
+var ConnectionManager = require('../models/connectionManager');
 
 /** '/api/connectToDb' */
 function connectToDb(req, res){
     var connection = new ConnectionManager();
     connection.connect();
-    res.sendSrarus(200);
+    response = {
+        status: 'success',
+        data: "U've been connected to db"
+    }
+    res.send(response);
 }
 
-router.post('/api/connectToDb', connectToDb);
-
-module.exports = router;
+module.exports = {
+    connectToDb: connectToDb
+};

@@ -1,13 +1,14 @@
-var express = require('express');
-var router = express.Router();
+var Vulnerability = require('../models/vulnerability');
 
 /** '/api/getAllData' */
 function getAllData(req, res){
-    var connection = new ConnectionManager();
-    connection.connect();
-    res.sendSrarus(200);
+    var vulnerabilities = Vulnerability.findOne().then(vulnerability =>{
+        var result = [];
+        result.push(vulnerability);
+        res.send(result);
+    })
 }
 
-router.post('/api/connectToDb', connectToDb);
-
-module.exports = router;
+module.exports = {
+    getAllData: getAllData
+};

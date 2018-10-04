@@ -4,6 +4,6 @@ export default class SequelizeOptions {
 
     constructor(){
         this.port = '5432';
-        this.host = '192.168.0.11';
+        this.host = '192.168.0.15';
     }
 }

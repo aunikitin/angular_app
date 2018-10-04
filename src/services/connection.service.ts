@@ -9,6 +9,6 @@ export class ConnectionService{
     constructor(private http: HttpClient){ }
       
     connectToDb(connectionSettings: ConnectionSettings){
-        return this.http.post('http://localhost:8080/api/connectToDb', connectionSettings); 
+        return this.http.post('/api/connectToDb', connectionSettings); 
     }
 }
