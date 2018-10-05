@@ -1,4 +1,5 @@
 var Vulnerability = require('../models/vulnerability');
+// var dataRepository = require('')
 
 /** '/api/getAllData' */
 function getAllData(req, res){

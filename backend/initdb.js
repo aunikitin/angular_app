@@ -1,9 +1,9 @@
 var csvtojson = require("csvtojson");
 var Vulnerability = require("./models/vulnerability");
-var ConnectionManager = require('./db/connectionManager');
+var connectionManager = require('./models/connectionManager');
 
 async function seedData() {
-    const sequelize = new ConnectionManager().initSequalize();
+    const sequelize = connectionManager.sequelize;
     const dataPath = `F:\\University\\5 курс\\Борисенко 5 курс\\superProtectedApp\\backend\\db.csv`;
     const data = await csvtojson({
         delimiter: ';'
@@ -12,7 +12,6 @@ async function seedData() {
     sequelize.sync({force: true}).then(()=>{
         return sequelize.transaction().then((t)=> {
             var promises = data.map((row, index) => {
-                index++;
                 return Vulnerability.create({id: index, ...row}, {transaction: t});
             });
             Promise.all(promises).then(()=> {

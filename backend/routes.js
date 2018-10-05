@@ -7,8 +7,8 @@ let router = null;
 
 function initRoutes() {
     router.get('/', homeController.home);
-
     router.get('/api/getAllData', dataController.getAllData);
+
     router.post('/api/connectToDb', connectionController.connectToDb);
 }
 

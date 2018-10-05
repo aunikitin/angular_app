@@ -1,9 +1,12 @@
-var ConnectionManager = require('../models/connectionManager');
+var connectionManager = require('../models/connectionManager');
 
 /** '/api/connectToDb' */
 function connectToDb(req, res){
-    var connection = new ConnectionManager();
-    connection.connect();
+    var response = {};
+    if(!connectionManager.exist){
+        var connection = connectionManager();
+        connection.connect();
+    }
     response = {
         status: 'success',
         data: "U've been connected to db"

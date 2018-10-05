@@ -46,24 +46,32 @@ class ConnectionManager {
         this._sequelize = newValue;
     }
 
-    constructor(db, username, password, host, port){     
-        if(db){
-            this._db = db;
+    get exist(){
+        if(!this._exist){
+            return false;
         }
-        if(username){
-            this._username = username;
-        }
-        if(password){
-            this._password = password;
-        }
-        this.sequelizeOptions = {port, host};
+        return this._exist;
+    }
+    set exist(newValue){
+        this._exist = newValue;
     }
 
-    initSequalize(){
+    constructor(db, username, password, host, port){     
+        if(db){
+            this.db = db;
+        }
+        if(username){
+            this.username = username;
+        }
+        if(password){
+            this.password = password;
+        }
+        this.sequelizeOptions = {port, host};
+
         var connectionString = `${this.sequelizeOptions.dialect}://${this.username}:${this.password}@${this.sequelizeOptions.host}:${this.sequelizeOptions.port}/${this.db}`;
         var sequelize = new Sequelize(connectionString, {define: {timestamps: false}});
         this.sequelize = sequelize;
-        return this.sequelize;
+        this.exist = true;
     }
 
     connect(){
@@ -76,4 +84,4 @@ class ConnectionManager {
     }
 }
 
-module.exports = ConnectionManager;
+module.exports = new ConnectionManager();

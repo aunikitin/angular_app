@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../services/connection.service'
-import Item from '../models/vulnerability'
 import ConnectionSettings from '../models/connectionSettings'
  
 @Component({
@@ -8,8 +7,12 @@ import ConnectionSettings from '../models/connectionSettings'
     templateUrl: './app.component.html',
     providers: [ConnectionService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     constructor( private connectionService: ConnectionService){}
+
+    ngOnInit(){
+        this.connect();
+    }
 
     public connectionSettings = new ConnectionSettings();
     public host: string = this.connectionSettings.options.host;
