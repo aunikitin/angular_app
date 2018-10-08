@@ -2,38 +2,39 @@
     <div class="form-inline">
         <div class="form-group">
             <div class="col-md-8">
-                <input class="form-control" [(ngModel)]="host" placeholder = "Хост" />
+                <input class="form-control" [(ngModel)]="host" placeholder = "Хост" disabled/>
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-6">
-                <input type="text" class="form-control" [(ngModel)]="port" placeholder="Порт" />
+                <input type="text" class="form-control" [(ngModel)]="port" placeholder="Порт" disabled/>
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-6">
-                <input type="text" class="form-control" [(ngModel)]="username" placeholder="Имя пользователя" />
+                <input type="text" class="form-control" [(ngModel)]="username" placeholder="Имя пользователя" disabled/>
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-4">
-                <input type="password" class="form-control" [(ngModel)]="password" placeholder="Пароль" />
+                <input type="password" class="form-control" [(ngModel)]="password" placeholder="Пароль" disabled/>
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-2">
-                <input type="text" class="form-control" [(ngModel)]="dbname" placeholder="Наименование БД" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-1">
-                <button class="btn btn-default" (click)="connect()">Подключиться</button>
+                <input type="text" class="form-control" [(ngModel)]="dbname" placeholder="Наименование БД" disabled/>
             </div>
         </div>
     </div>
 </div>
 <br>
-<hr width = "100%"/>
-<div *ngIf="done">
-    <table-comp></table-comp>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <filter-comp></filter-comp>
+        </div>
+        <div class="col-6">
+            <table-comp></table-comp>
+        </div>
+    </div>
 </div>

@@ -11,6 +11,5 @@ export default class ConnectionSettings{
         this.userName = 'postgres';
         this.password = '12345';
         this.options = new SequelizeOptions();
-        console.log(this);
-    }
+     }
 }

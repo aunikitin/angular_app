@@ -1,15 +1,23 @@
-var Vulnerability = require('../models/vulnerability');
-// var dataRepository = require('')
+var vulnerabilitiesRepository = require('../repository/vulnerabilitiesRepository');
 
-/** '/api/getAllData' */
-function getAllData(req, res){
-    var vulnerabilities = Vulnerability.findOne().then(vulnerability =>{
-        var result = [];
-        result.push(vulnerability);
-        res.send(result);
-    })
+/** '/api/getById' */
+function getById(req, res, params){
+    const id = params.id;
+    vulnerabilitiesRepository.findById(id).then((vulnerability) =>{
+        res.write(JSON.stringify(vulnerability));
+        res.end();
+    });
+}
+
+/** '/api/getData' */
+function getData(req, res, params){
+    vulnerabilitiesRepository.getData(params).then(vulnerabilities =>{
+        res.write(JSON.stringify(vulnerabilities));
+        res.end();
+    });       
 }
 
 module.exports = {
-    getAllData: getAllData
+    getById: getById,
+    getData: getData
 };

@@ -1,16 +1,139 @@
-<div *ngIf="done">
-    
+<div *ngIf="vulnerabilities != null">
+    <table style="width:60%">
+        <tr>
+            <td>
+                <span class="form-group">
+                    Show <select style="display: inline; width: 30%" class="form-control" 
+                        required 
+                        [(ngModel)]="defaultOptions.limit"
+                        (change)="limitChange($event.target.value)">
+                        <option [value]="perPage" *ngFor="let perPage of defaultOptions.available">{{perPage}}</option>
+                    </select>
+                </span>
+            </td>
+            <td>
+                <span class="form-group">
+                    <input style="display: inline; width: 30%" class="form-control" type="text" 
+                    [(ngModel)]="page"
+                    (change)="pageChange($event.target.value)"> of {{pages}}
+                </span>
+            </td>
+        </tr>
+    </table>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>id</th>
                 <th>identifier</th>
+                <th>vulnerabilityName</th>
+                <th>vulnerabilityDescription</th>
+                <th>vendor</th>
+                <th>softwareName</th>
+                <th>softwareVersion</th>
+                <th>softwareType</th>
+                <th>softwareNameAndTypeOfHardwarePlatform</th>
+                <th>dateOfPlacement</th>
+                <th>cvss2</th>
+                <th>cvss3</th>
+                <th>vulnerabilitySeverity</th>
+                <th>possibleMitigationMeasures</th>
+                <th>vulnerabilityStatus</th>
+                <th>exploit</th>
+                <th>informationOnTheElimination</th>
+                <th>referencesToSources</th>
+                <th>identifiersOfOtherTypes</th>
+                <th>otherInformation</th>
+                <th>cweDescription</th>
+                <th>cweType</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let vulnerability of receivedData">
-                <td>{{vulnerability.id}}</td>
+            <tr>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.identifier" placeholder="identifier"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.vulnerabilityName" placeholder="vulnerabilityName"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.vulnerabilityDescription" placeholder="vulnerabilityDescription"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.vendor" placeholder="vendor"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.softwareName" placeholder="softwareName"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.softwareVersion" placeholder="softwareVersion"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.softwareType" placeholder="softwareType"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.softwareNameAndTypeOfHardwarePlatform" placeholder="softwareNameAndTypeOfHardwarePlatform"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.dateOfPlacement" placeholder="dateOfPlacement"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.cvss2" placeholder="cvss2"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.cvss3" placeholder="cvss3"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.vulnerabilitySeverity" placeholder="vulnerabilitySeverity"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.possibleMitigationMeasures" placeholder="possibleMitigationMeasures"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.vulnerabilityStatus" placeholder="vulnerabilityStatus"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.exploit" placeholder="exploit"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.informationOnTheElimination" placeholder="informationOnTheElimination"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.referencesToSources" placeholder="referencesToSources"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.identifiersOfOtherTypes" placeholder="identifiersOfOtherTypes"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.otherInformation" placeholder="otherInformation"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.cweDescription" placeholder="cweDescription"
+                    (change)="filterChange($event.target.value)"/></td>
+                <td><input type="text" class="form-control" 
+                    [(ngModel)]="filterObject.cweType" placeholder="cweType"
+                    (change)="filterChange($event.target.value)"/></td>
+            </tr>
+            <tr *ngFor="let vulnerability of vulnerabilities">
                 <td>{{vulnerability.identifier}}</td>
+                <td>{{vulnerability.vulnerabilityName}}</td>
+                <td>{{vulnerability.vulnerabilityDescription}}</td>
+                <td>{{vulnerability.vendor}}</td>
+                <td>{{vulnerability.softwareName}}</td>
+                <td>{{vulnerability.softwareVersion}}</td>
+                <td>{{vulnerability.softwareType}}</td>
+                <td>{{vulnerability.softwareNameAndTypeOfHardwarePlatform}}</td>
+                <td>{{vulnerability.dateOfPlacement}}</td>
+                <td>{{vulnerability.cvss2}}</td>
+                <td>{{vulnerability.cvss3}}</td>
+                <td>{{vulnerability.vulnerabilitySeverity}}</td>
+                <td>{{vulnerability.possibleMitigationMeasures}}</td>
+                <td>{{vulnerability.vulnerabilityStatus}}</td>
+                <td>{{vulnerability.exploit}}</td>
+                <td>{{vulnerability.informationOnTheElimination}}</td>
+                <td>{{vulnerability.referencesToSources}}</td>
+                <td>{{vulnerability.identifiersOfOtherTypes}}</td>
+                <td>{{vulnerability.otherInformation}}</td>
+                <td>{{vulnerability.cweDescription}}</td>
+                <td>{{vulnerability.cweType}}</td>
             </tr>
         </tbody>
     </table>

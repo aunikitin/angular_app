@@ -7,7 +7,7 @@ class SequelizeOptions {
         if(this._host){
             return this._host;
         }
-        return '192.168.0.15';
+        return '192.168.56.101';
     }
     set host(newValue){
         this._host = newValue;

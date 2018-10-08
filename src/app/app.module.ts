@@ -5,10 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent }   from './app.component';
 import { TableComponent } from './table/table.component'
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpClientModule ],
-    declarations: [ AppComponent, TableComponent ],
+    declarations: [ AppComponent, TableComponent, FilterComponent ],
     bootstrap:    [ AppComponent ]
 })
 
