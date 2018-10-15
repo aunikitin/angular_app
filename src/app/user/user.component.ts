@@ -90,9 +90,11 @@ export class UserComponent implements OnInit {
     }
 
     addUser(user: User){
-        this.editedUser = new User("","","", "", 1);
-        this.users.push(this.editedUser);
-        this.isNewRecord = true;
+        if(!this.isNewRecord){
+            this.editedUser = new User("","","", "", 1);
+            this.users.push(this.editedUser);
+            this.isNewRecord = true;
+        }
     }
 
     // сохраняем пользователя

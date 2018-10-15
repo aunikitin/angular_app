@@ -5,7 +5,6 @@
         (outputLimit) = "limitChange($event)"
         (outputPage) = "pageChange($event)">
     </paging-comp>
-    <input type="button" value="Добавить" class="btn btn-default" (click)="addUser()" />
     <table class="table table-striped">
         <thead>
             <tr>
@@ -26,7 +25,9 @@
                         attr.data-placeholder="{{property}}"
                         (change)="filterChange($event.target.value)"/>
                 </td>
-                <td style="width:50px"></td>
+                <td>
+                    <input type="button" value="Добавить" class="btn btn-default" (click)="addUser()" />
+                </td>
             </tr>
             <tr style="text-align: center" *ngFor="let user of users">
                 <ng-template [ngTemplateOutlet]="loadTemplate(user)" 
