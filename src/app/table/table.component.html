@@ -1,6 +1,6 @@
 <div *ngIf="vulnerabilities != null">
     <paging-comp 
-        [count]="count"
+        [pages]="pages"
         (outputLimit) = "limitChange($event)"
         (outputPage) = "pageChange($event)"></paging-comp>
     <table class="table table-striped">

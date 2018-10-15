@@ -38,6 +38,12 @@ module.exports = {
                 case '/public/logo.jpg':
                     homeController.logo(req, res);
                     break;
+                case '/public/edit.jpg':
+                    homeController.edit(req, res);
+                    break;
+                case '/public/trash.jpg':
+                    homeController.trash(req, res);
+                    break;
                 case '/favicon.ico':
                     homeController.icon(req, res);
                     break;
@@ -51,19 +57,35 @@ module.exports = {
                 case '/api/auth':
                     authController.authorizeUser(req, res);
                     break;
-                case '/api/newUser':
-                    userController.createUser(req, res);
-                    break;
                 case '/api/register':
                     userController.registerNewUser(req, res);
                     break;
                 case '/api/connectToDb':
                     connectionController.connectToDb(req,res);
                     break;
+                case '/api/user/add':
+                    userController.createUser(req, res);
+                    break;
+                case '/api/user/update':
+                    userController.updateUser(req, res);
+                    break;
                 default:
                     res.end();
                     break;
             }
+        }
+        if(httpVerb == 'DELETE'){
+            switch(url){
+                case '/api/user/delete':
+                    userController.deleteUser(req, res, params);
+                    break;
+                default:
+                    res.end();
+                    break;
+            }
+        }
+        if(httpVerb == 'PUT'){
+            res.end();
         }
     }
 }

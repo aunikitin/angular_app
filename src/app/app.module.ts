@@ -17,10 +17,12 @@ import { AuthGuard } from './auth.guard';
 import { AccessGuard } from './access.guard';
 import { PagingComponent } from './paging/paging.component';
 import { UserComponent } from './user/user.component';
+import { IndexComponent } from './main/index.component';
 
 // определение маршрутов
 const appRoutes: Routes =[
-    { path: '', component: MainComponent, canActivate: [AuthGuard]},
+    { path: '', redirectTo: 'index', pathMatch: 'full'},
+    { path: 'index', component: IndexComponent, canActivate: [AuthGuard]},
     { path: 'users', component: UserComponent, canActivate: [AuthGuard, AccessGuard]},
     { path: 'vulnerabilities', component: TableComponent, canActivate: [AuthGuard]},
     { path: 'login', component: AuthorizeComponent},
@@ -44,7 +46,8 @@ export const httpInterceptorProviders = [
         AuthorizeComponent, 
         NotFoundComponent, 
         PagingComponent,
-        UserComponent],
+        UserComponent,
+        IndexComponent],
     bootstrap:    [ AppComponent ],
     providers:    [ AuthService, httpInterceptorProviders, AuthGuard, AccessGuard ]
 })

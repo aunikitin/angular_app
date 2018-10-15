@@ -23,14 +23,24 @@ export class UserService{
                 }
             }
         }
-        return this.http.get('/api/user/getUsers', {params: params});
+        return this.http.get('/api/user/getUsers', {params: params });
     }
 
-    addUser(){
-
+    addUser(user){
+        return this.http.post('/api/user/add', user);
     }
 
-    deleteUser(){
-        
+    deleteUser(id: number){
+        let params = new HttpParams();
+        params = params.append('id', id.toString());
+        return this.http.delete('/api/user/delete', { params: params });
+    }
+
+    updateUser(id: number, user){
+        let body = {
+            id: id,
+            user: user
+        };
+        return this.http.post('/api/user/update', body);
     }
 }

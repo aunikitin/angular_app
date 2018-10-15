@@ -29,6 +29,28 @@ function getUsers(params){
     return User.findAndCountAll({limit, offset, where: filter});
 }
 
+function update(params){
+    let newData = {};
+    let id;
+    if(params != null){
+        id = params.id;
+        delete params.id;
+        for(var property in params.user){
+            if(params[property] == "") continue;
+            newData[property] = params.user[property];
+        }
+        // нельзя сменить роль админа
+        if(id == 1){
+            newData["accessLevel"] = 0;
+        }
+    }
+    return User.update(newData, {
+        where: {
+            id: id
+        }
+    })
+}
+
 function createUser(user){
     return User.findOrCreate({
         where: {
@@ -52,9 +74,19 @@ function get(credentials){
     })
 }
 
+function deleteUser(id){
+    return User.destroy({
+        where: {
+            'id': id
+        }
+    });
+}
+
 module.exports = {
     createUser: createUser,
     findById: findById,
     getUsers: getUsers,
-    get:get
+    get:get,
+    deleteUser: deleteUser,
+    update: update
 }

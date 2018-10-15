@@ -7,11 +7,12 @@ import { AuthService } from '../services/auth.service';
     templateUrl: './app.component.html',
     providers: [ConnectionService, AuthService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
     constructor(private authService: AuthService){}
 
-    auth: boolean;
-    ngOnInit(){
-        this.auth = !this.authService.isTokenExpired() && window.localStorage.getItem("access-level") !== null;
+    isAuthorized = !this.authService.isTokenExpired();
+
+    authorizeChanged(auth){
+        this.isAuthorized = auth;
     }
 }

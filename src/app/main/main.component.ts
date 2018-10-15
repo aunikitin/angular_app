@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service'
-import { AuthService } from '../../services/auth.service';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
      
 @Component({
     selector: 'main-comp',
     templateUrl: './main.component.html',
-    providers: [DataService, AuthService]
+    providers: []
 })
 export class MainComponent{ 
-    constructor(private dataService: DataService, private authService: AuthService){}
+    constructor(){}
     
-    ngOnInit(){
+    @Output() isAuthorized = new EventEmitter<boolean>()
+
+    authorizeChanged(auth){
+        this.isAuthorized.emit(auth);
     }
 }

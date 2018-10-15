@@ -14,6 +14,8 @@ export class AuthorizeComponent implements OnInit {
 
     @ViewChild('authTemplate') authTemplate: TemplateRef<any>;
     @ViewChild('registerTemplate') registerTemplate: TemplateRef<any>;
+
+    @Output() bindMenu = new EventEmitter<boolean>(false);
     
     login: string;
     password: string;
@@ -24,6 +26,7 @@ export class AuthorizeComponent implements OnInit {
     ngOnInit(){
         window.localStorage.removeItem('X-access-token');
         window.localStorage.removeItem('access-level');
+        this.bindMenu.emit(false);
     }
 
     // загружаем один из двух шаблонов
@@ -69,9 +72,10 @@ export class AuthorizeComponent implements OnInit {
     }
 
     authorize(){
-        const user = new User(this.login, this.password, this.email);
+        const user = new User(null, this.login, this.password, this.email, null);
         this.authService.authorize(user).subscribe((result: {auth: boolean, token: string, accessLevel: number}) => {
             if(result.auth){
+                this.bindMenu.emit(true);
                 window.localStorage.setItem('X-access-token', result.token);
                 window.localStorage.setItem('access-level', result.accessLevel.toString());
                 this.router.navigate(['/']);
@@ -83,9 +87,10 @@ export class AuthorizeComponent implements OnInit {
     }
 
     register(){
-        const user = new User(this.login, this.password, this.email);
+        const user = new User(null, this.login, this.password, this.email, null);
         this.authService.register(user).subscribe((result: {auth: boolean, token: string, accessLevel: number}) => {
             if(result.auth){
+                this.bindMenu.emit(true);
                 window.localStorage.setItem('X-access-token', result.token);
                 window.localStorage.setItem('access-level', result.accessLevel.toString());
                 this.router.navigate(['/']);

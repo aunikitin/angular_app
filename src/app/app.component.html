@@ -1,4 +1,2 @@
-<nav-comp></nav-comp>
-<div style="margin-top: 50px; margin-left: 50px">
-    <router-outlet></router-outlet>
-</div>
+<auth-comp *ngIf='!isAuthorized' (bindMenu) = "authorizeChanged($event)"></auth-comp>
+<main-comp *ngIf='isAuthorized' (isAuthorized) = "authorizeChanged($event)"></main-comp>

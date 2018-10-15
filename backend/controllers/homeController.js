@@ -24,6 +24,26 @@ function logo(req, res){
     readStream.pipe(res);
 }
 
+function edit(req, res){
+    var filePath = appPath + '\\public\\edit.jpg'
+    res.writeHead(200, {
+        //'Conetent-Type': 'application/json',
+        //'Content-Length': stat.size
+    });
+    var readStream = fileSystem.createReadStream(filePath);
+    readStream.pipe(res);
+}
+
+function trash(req, res){
+    var filePath = appPath + '\\public\\trash.jpg'
+    res.writeHead(200, {
+        //'Conetent-Type': 'application/json',
+        //'Content-Length': stat.size
+    });
+    var readStream = fileSystem.createReadStream(filePath);
+    readStream.pipe(res);
+}
+
 function app(req, res){
     var filePath = appPath + '\\public\\app.js';
     var stat = fileSystem.statSync(filePath);
@@ -50,5 +70,7 @@ module.exports = {
     home: home,
     app: app,
     icon: icon,
-    logo: logo
+    logo: logo,
+    edit: edit,
+    trash: trash
 }

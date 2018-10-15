@@ -1,4 +1,4 @@
-<div style='position:absolute; top:0; left:0; width: 100%; background-color: currentColor'>
+<div *ngIf='isAuthorized' style='position:absolute; top:0; left:0; width: 100%; background-color: currentColor'>
     <ul style='display:flex' class="nav">
         <li class="nav-item">
             <a routerLink="/">Main</a>
@@ -6,12 +6,12 @@
         <li class="nav-item">
                 <a routerLink="/vulnerabilities">Vulnerabilities</a>
             </li>
-        <li *ngIf="isAdmin" class="nav-item">
+        <li *ngIf='isAdmin' class="nav-item">
             <a routerLink="/users">Users</a>
         </li>
         <li сlass="nav-item">
-            <a routerLink="/logout">Log Out</a>
+            <a (click)="logOut()">Log Out</a>
         </li>
     </ul>
 </div>
-<hr>
+<hr *ngIf='isAuthorized'>

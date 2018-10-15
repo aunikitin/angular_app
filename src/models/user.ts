@@ -7,7 +7,10 @@ export default class User {
     email: string = "";
     accessLevel: Custom.AccessLevel
 
-    constructor(login, password, email){
+    constructor(id, login, password, email, accessLevel){
+        if(id){
+            this.id = id;
+        }
         if(login){
             this.login = login;
         }else{
@@ -21,12 +24,16 @@ export default class User {
         if(email){
             this.email = email;
         }
+        if(accessLevel != null){
+            this.accessLevel = accessLevel;
+        }else{
+            this.accessLevel = Custom.AccessLevel.user;
+        }
     }
 
     static getProperties(instance: User){
-        var properties = ["id"];
-        var properties = properties.concat(Object.getOwnPropertyNames(instance));
-        properties.push("accessLevel");
+        var properties = ["id", "login", "password", "email", "accessLevel"];
+        //var properties = properties.concat(Object.getOwnPropertyNames(instance));
         return properties;
     }
 }

@@ -1,5 +1,6 @@
 var router = require('./routes');
 var http = require('http');
+var socket = require('socket.io');
 var port = 3000;
 
 const requestHandler = (req, res) => {
@@ -8,6 +9,11 @@ const requestHandler = (req, res) => {
 };
 
 const server = http.createServer(requestHandler);
+const io = socket(server);
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+});
 
 server.listen(port, (err) => {
     if (err) {

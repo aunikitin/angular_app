@@ -27,9 +27,9 @@ export class TableComponent implements OnInit{
             this._page = 0;
         }else{
             if(newPage > (this.count/this.defaultOptions.limit)){
-                this._page = Math.ceil(this.count/this.defaultOptions.limit);
+                this._page = Math.round(this.count/this.defaultOptions.limit);
             }else{
-                this._page = Math.ceil(newPage);
+                this._page = Math.round(newPage);
             }
         }
     }
@@ -39,7 +39,7 @@ export class TableComponent implements OnInit{
         this.dataService.getData(15, 0, null).subscribe((data: {count: number, rows: Vulnerability[]})=>{
             this.vulnerabilities = data.rows;
             this.count = data.count;
-            this.pages = Math.ceil(data.count/15);
+            this.pages = Math.round(data.count/15);
             this.properties = Vulnerability.getProperties(this.filterObject);
         },
         (err) =>{
@@ -52,7 +52,7 @@ export class TableComponent implements OnInit{
         this.dataService.getData(newLimit, 0, this.filterObject).subscribe((data: {count: number, rows: Vulnerability[]})=>{
             this.vulnerabilities = data.rows;
             this.count = data.count;
-            this.pages = Math.ceil(data.count/newLimit);
+            this.pages = Math.round(data.count/newLimit);
         },
         (err) =>{
             this.errorService.catchError(err);
@@ -65,7 +65,7 @@ export class TableComponent implements OnInit{
         this.dataService.getData(this.defaultOptions.limit, this.offset, this.filterObject).subscribe((data: {count: number, rows: Vulnerability[]})=>{
             this.vulnerabilities = data.rows;
             this.count = data.count;
-            this.pages = Math.ceil(data.count/this.defaultOptions.limit);
+            this.pages = Math.round(data.count/this.defaultOptions.limit);
         },
         (err) =>{
             this.errorService.catchError(err);
@@ -77,7 +77,7 @@ export class TableComponent implements OnInit{
         this.dataService.getData(this.defaultOptions.limit, this.offset, this.filterObject).subscribe((data: {count: number, rows: Vulnerability[]})=>{
             this.vulnerabilities = data.rows;
             this.count = data.count;
-            this.pages = Math.ceil(data.count/this.defaultOptions.limit);
+            this.pages = Math.round(data.count/this.defaultOptions.limit);
         },
         (err) =>{
             this.errorService.catchError(err);
