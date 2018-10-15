@@ -31,11 +31,35 @@ function authorizeUser(req, res, parentCallback){
                 parentCallback(new Error('Неверный логин/пароль'));
                 return;
             }else{
-                var token = getToken(user);
-                parentCallback(null, token);
+                var result = getToken(user);
+                result.accessLevel = user.accessLevel;
+                parentCallback(null, result);
             }
         });
     });
+}
+
+function getUserFromToken(req, res, parentCallback){
+    var token = req.headers['x-access-token'];
+    if (!token) {
+        parentCallback(new Error('Токен отсутствует'));
+        return;
+    };
+    var callback = (err, decoded) => {
+        if (err) {
+            parentCallback(new Error('Токен истёк'));
+            return;
+        } else {
+            userRepository.findById(decoded.id).then(user =>{
+                if(!user){
+                    parentCallback(new Error('Пользователь не идентифицирован'));
+                    return;
+                }
+                parentCallback(null, user);
+            });
+        }
+    }
+    verify(token, callback);
 }
 
 function identifyUser(req, res, parentCallback){
@@ -81,5 +105,6 @@ function verify(token, callback){
 module.exports = {
     getToken: getToken,
     identifyUser: identifyUser,
-    authorizeUser: authorizeUser
+    authorizeUser: authorizeUser,
+    getUserFromToken: getUserFromToken
 }

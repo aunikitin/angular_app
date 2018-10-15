@@ -14,6 +14,7 @@ function getData(params){
     delete params.offset;
     if(params != {}){
         for(var property in params){
+            if(params[property] == "") continue;
             filter[property] = {
                 [Op.iLike]: `%${params[property]}%`
             }

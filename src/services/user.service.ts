@@ -2,17 +2,17 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
-export class DataService{
+export class UserService{
   
     constructor(private http: HttpClient){ }
       
     getById(id: string){
         let params = new HttpParams();
         params = params.append('id', id);
-        return this.http.get('/api/data/getById', { params: params}); 
+        return this.http.get('/api/user/getById', { params: params }); 
     }
 
-    getData(limit, offset, filterObject){
+    getUsers(limit, offset, filterObject){
         let params = new HttpParams();
         params = params.append('limit', limit);
         params = params.append('offset', offset);
@@ -23,6 +23,14 @@ export class DataService{
                 }
             }
         }
-        return this.http.get('/api/data/getData', {params: params});
+        return this.http.get('/api/user/getUsers', {params: params});
+    }
+
+    addUser(){
+
+    }
+
+    deleteUser(){
+        
     }
 }

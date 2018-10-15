@@ -1,4 +1,3 @@
-// var app = require('./app');
 var router = require('./routes');
 var http = require('http');
 var port = 3000;

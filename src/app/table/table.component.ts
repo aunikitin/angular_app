@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service'
+import { DataService } from '../../services/data.service';
+import { ErrorService } from '../../services/err.service';
 
 import Vulnerability from '../../models/vulnerability';
+import { SettingsService } from '../../services/settings.service';
       
 @Component({
     selector: 'table-comp',
     templateUrl: './table.component.html',
-    providers: [DataService]
+    providers: [DataService, ErrorService, SettingsService]
 })
 export class TableComponent implements OnInit{ 
     vulnerabilities: Vulnerability[];
     count: number;
-    defaultOptions = {
-        available:[5,10,15,20],
-        limit:15
-    }
+    properties: string[];
+    defaultOptions = this.settingsService.defaultPagingOptions;
     filterObject: Vulnerability = new Vulnerability();
     pages:number;
     offset: number;
@@ -33,21 +33,29 @@ export class TableComponent implements OnInit{
             }
         }
     }
-    constructor(private dataService: DataService){}
+    constructor(private dataService: DataService, private errorService: ErrorService, private settingsService: SettingsService){}
     
     ngOnInit(){
         this.dataService.getData(15, 0, null).subscribe((data: {count: number, rows: Vulnerability[]})=>{
             this.vulnerabilities = data.rows;
             this.count = data.count;
             this.pages = Math.ceil(data.count/15);
+            this.properties = Vulnerability.getProperties(this.filterObject);
+        },
+        (err) =>{
+            this.errorService.catchError(err);
         });
     }
 
     limitChange(newLimit){
+        this.defaultOptions.limit = newLimit;
         this.dataService.getData(newLimit, 0, this.filterObject).subscribe((data: {count: number, rows: Vulnerability[]})=>{
             this.vulnerabilities = data.rows;
             this.count = data.count;
             this.pages = Math.ceil(data.count/newLimit);
+        },
+        (err) =>{
+            this.errorService.catchError(err);
         });
     }
 
@@ -58,6 +66,9 @@ export class TableComponent implements OnInit{
             this.vulnerabilities = data.rows;
             this.count = data.count;
             this.pages = Math.ceil(data.count/this.defaultOptions.limit);
+        },
+        (err) =>{
+            this.errorService.catchError(err);
         });
     }
 
@@ -67,6 +78,9 @@ export class TableComponent implements OnInit{
             this.vulnerabilities = data.rows;
             this.count = data.count;
             this.pages = Math.ceil(data.count/this.defaultOptions.limit);
+        },
+        (err) =>{
+            this.errorService.catchError(err);
         });
     }
 }

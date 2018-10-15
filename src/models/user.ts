@@ -2,9 +2,9 @@ import { throwError } from "rxjs";
 
 export default class User {
     id: number;
-    login: string;
+    login: string = "";
     password: string;
-    email: string;
+    email: string = "";
     accessLevel: Custom.AccessLevel
 
     constructor(login, password, email){
@@ -21,5 +21,12 @@ export default class User {
         if(email){
             this.email = email;
         }
+    }
+
+    static getProperties(instance: User){
+        var properties = ["id"];
+        var properties = properties.concat(Object.getOwnPropertyNames(instance));
+        properties.push("accessLevel");
+        return properties;
     }
 }

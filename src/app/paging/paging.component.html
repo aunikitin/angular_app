@@ -1,0 +1,21 @@
+<table style="width:60%">
+    <tr>
+        <td>
+            <span class="form-group">
+                Show <select style="display: inline; width: 40%" class="form-control" 
+                    required 
+                    [(ngModel)]="defaultOptions.limit"
+                    (change)="limitChange($event.target.value)">
+                    <option [value]="perPage" *ngFor="let perPage of defaultOptions.available">{{perPage}}</option>
+                </select>
+            </span>
+        </td>
+        <td>
+            <span class="form-group">
+                <input style="display: inline; width: 30%" class="form-control" type="text" 
+                [(ngModel)]="page"
+                (change)="pageChange($event.target.value)"> of {{count}} //todo
+            </span>
+        </td>
+    </tr>
+</table>

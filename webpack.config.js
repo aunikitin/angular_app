@@ -6,18 +6,22 @@ module.exports = {
     entry: {
         'app': './src/main.ts'
     },
-   output:{
+    devServer: {
+        historyApiFallback: true,
+    },
+    output:{
         path: path.resolve(__dirname, './public'),     // путь к каталогу выходных файлов - папка public
         publicPath: '/public/',
         filename: "[name].js"       // название создаваемого файла
     },
-   resolve: {
+    resolve: {
         extensions: ['.ts', '.js']
     },
-   module:{
-       rules:[   //загрузчик для ts
+    module:{
+        rules:[   //загрузчик для ts
            {
                 test: /\.ts$/, // определяем тип файлов
+                exclude: /node_modules/,
                 use: [{
                         loader: 'awesome-typescript-loader',
                         options: { configFileName: path.resolve(__dirname, 'tsconfig.json') }
@@ -36,11 +40,12 @@ module.exports = {
             }
        ]
     },
-   plugins: [
-    new webpack.ContextReplacementPlugin(
-        /angular(\\|\/)core/,
-        path.resolve(__dirname, 'src'), // каталог с исходными файлами
-      {} // карта маршрутов
-    )
-  ]
+    plugins: [
+        new webpack.ContextReplacementPlugin(
+            /angular(\\|\/)core/,
+            path.resolve(__dirname, 'src'), // каталог с исходными файлами
+            {} // карта маршрутов
+        ),
+        new webpack.SourceMapDevToolPlugin({})
+  ] 
 }

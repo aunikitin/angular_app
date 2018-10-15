@@ -8,11 +8,20 @@ function home(req, res){
 
     res.writeHead(200, {
         'Conetent-Type': 'text/html',
-        //'Content-Length': stat.size
-    })
+    });
     var readStream = fileSystem.createReadStream(filePath);
     readStream.pipe(res);
     //return res.sendFile(path.resolve(process.cwd(), 'index.html'));
+}
+
+function logo(req, res){
+    var filePath = appPath + '\\public\\logo.jpg'
+    res.writeHead(200, {
+        //'Conetent-Type': 'application/json',
+        //'Content-Length': stat.size
+    });
+    var readStream = fileSystem.createReadStream(filePath);
+    readStream.pipe(res);
 }
 
 function app(req, res){
@@ -22,12 +31,24 @@ function app(req, res){
     res.writeHead(200, {
         //'Conetent-Type': 'application/json',
         //'Content-Length': stat.size
-    })
+    });
+    var readStream = fileSystem.createReadStream(filePath);
+    readStream.pipe(res);
+}
+
+function icon(req, res){
+    var filePath = appPath + '\\public\\favicon.ico'
+    res.writeHead(200, {
+        //'Conetent-Type': 'application/json',
+        //'Content-Length': stat.size
+    });
     var readStream = fileSystem.createReadStream(filePath);
     readStream.pipe(res);
 }
 
 module.exports = {
     home: home,
-    app: app
+    app: app,
+    icon: icon,
+    logo: logo
 }

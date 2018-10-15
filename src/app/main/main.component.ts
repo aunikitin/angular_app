@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service'
+import { AuthService } from '../../services/auth.service';
      
 @Component({
-    selector: 'filter-comp',
+    selector: 'main-comp',
     templateUrl: './main.component.html',
-    providers: [DataService]
+    providers: [DataService, AuthService]
 })
 export class MainComponent{ 
-    constructor(private dataService: DataService){}
+    constructor(private dataService: DataService, private authService: AuthService){}
     
-    // ngOnInit(){
-    //     this.dataService.getById('1').subscribe((data: Vulnerability) =>{
-    //         this.vulnerability = data;
-    //     })
-    // }
+    ngOnInit(){
+    }
 }

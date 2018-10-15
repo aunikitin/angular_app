@@ -4,7 +4,8 @@
     "scripts": {
         "build": "webpack",
         "start": "supervisor --watch backend/ backend/server.js",
-        "db": "node backend/initdb.js"
+        "db": "node backend/initdb.js",
+        "client": "webpack --watch"
     },
     "dependencies": {
         "@angular/common": "^6.1.8",
@@ -14,11 +15,12 @@
         "@angular/platform-browser": "^6.1.8",
         "@angular/platform-browser-dynamic": "^6.1.8",
         "@angular/router": "^6.1.8",
-        "@types/angular": "^1.6.51",
         "body-parser": "^1.18.3",
+        "bootstrap": "^4.1.3",
         "core-js": "^2.5.7",
         "express": "^4.16.3",
         "jsonwebtoken": "^8.3.0",
+        "jwt-decode": "^2.2.0",
         "pg": "^7.5.0",
         "pg-hstore": "^2.3.2",
         "rxjs": "^6.3.3",
@@ -27,6 +29,8 @@
     },
     "devDependencies": {
         "@types/node": "^10.11.4",
+        "@types/angular": "^1.6.51",
+        "@types/jwt-decode": "^2.2.1",
         "angular2-template-loader": "^0.6.2",
         "awesome-typescript-loader": "^5.2.1",
         "html-loader": "^0.5.5",

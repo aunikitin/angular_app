@@ -1,4 +1,5 @@
 var userRepository = require('../repository/userRepository');
+var authService = require('./authService');
 
 function createUser(req, res, parentCallback){
     var body = '';
@@ -17,6 +18,7 @@ function createUser(req, res, parentCallback){
             .spread((user, created) => {
                 if(created){
                     var response = authService.getToken(user);
+                    response.accessLevel = user.accessLevel;
                     parentCallback(null, response);
                 } else {
                     parentCallback(new Error('Введите другое имя пользователя'));

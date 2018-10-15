@@ -19,21 +19,30 @@ module.exports = {
         const httpVerb = req.method;
    
         if(httpVerb == 'GET'){
-            switch (url) {
-                case "/":
-                    homeController.home(req, res); 
-                    break;
-                case '/api/getById':
+            switch (url){
+                case '/api/data/getById':
                     dataController.getById(req, res, params);
                     break;
-                case '/api/getData':
+                case '/api/data/getData':
                     dataController.getData(req, res, params);
+                    break;
+                case '/api/user/getById':
+                    userController.getById(req, res, params);
+                    break;
+                case '/api/user/getUsers':
+                    userController.getUsers(req, res, params);
                     break;
                 case '/public/app.js':
                     homeController.app(req, res);
                     break;
+                case '/public/logo.jpg':
+                    homeController.logo(req, res);
+                    break;
+                case '/favicon.ico':
+                    homeController.icon(req, res);
+                    break;
                 default:
-                    res.end();
+                    homeController.home(req, res); 
                     break;
             }
         }

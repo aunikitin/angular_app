@@ -14,8 +14,15 @@ function getUsers(params){
     delete params.offset;
     if(params != {}){
         for(var property in params){
-            filter[property] = {
-                [Op.iLike]: `%${params[property]}%`
+            if(params[property] == "") continue;
+            if(parseInt(params[property]) != NaN){
+                filter[property] = {
+                    [Op.eq]: `${params[property]}`
+                }
+            }else{
+                filter[property] = {
+                    [Op.iLike]: `%${params[property]}%`
+                }
             }
         }
     }
