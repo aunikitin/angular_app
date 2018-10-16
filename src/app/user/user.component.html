@@ -25,9 +25,10 @@
                         attr.data-placeholder="{{property}}"
                         (change)="filterChange($event.target.value)"/>
                 </td>
-                <td>
+                <td style="text-align: center">
                     <input type="button" value="Добавить" class="btn btn-default" (click)="addUser()" />
                 </td>
+                <td></td>
             </tr>
             <tr style="text-align: center" *ngFor="let user of users">
                 <ng-template [ngTemplateOutlet]="loadTemplate(user)" 

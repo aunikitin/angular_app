@@ -89,7 +89,7 @@ function getUsers(req, res, params){
                     res.end();
                 });
             }else{
-                errorService.writeErrorToHead(res, err, 401);
+                errorService.writeErrorToHead(res, new Error("Недостаточно прав"), 401);
                 res.end();
             }
         }
