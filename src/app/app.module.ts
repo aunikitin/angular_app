@@ -18,11 +18,14 @@ import { AccessGuard } from './access.guard';
 import { PagingComponent } from './paging/paging.component';
 import { UserComponent } from './user/user.component';
 import { IndexComponent } from './main/index.component';
+import { SocketService } from '../services/socket.service';
+import { ChatComponent } from './chat/chat.component';
 
 // определение маршрутов
 const appRoutes: Routes =[
     { path: '', redirectTo: 'index', pathMatch: 'full'},
     { path: 'index', component: IndexComponent, canActivate: [AuthGuard]},
+    { path: 'chat', component: ChatComponent },
     { path: 'users', component: UserComponent, canActivate: [AuthGuard, AccessGuard]},
     { path: 'vulnerabilities', component: TableComponent, canActivate: [AuthGuard]},
     { path: 'login', component: AuthorizeComponent},
@@ -47,9 +50,15 @@ export const httpInterceptorProviders = [
         NotFoundComponent, 
         PagingComponent,
         UserComponent,
-        IndexComponent],
+        IndexComponent,
+        ChatComponent],
     bootstrap:    [ AppComponent ],
-    providers:    [ AuthService, httpInterceptorProviders, AuthGuard, AccessGuard ]
+    providers:    [
+        AuthService,
+        httpInterceptorProviders,
+        AuthGuard,
+        AccessGuard,
+        SocketService]
 })
 
 export class AppModule { }

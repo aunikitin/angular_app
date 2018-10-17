@@ -20,6 +20,6 @@ const User = sequelize.define('user', {
         allowNull: false,
         defaultValue: 1
     }
-}); 
+});
 
 module.exports = User;

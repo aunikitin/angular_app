@@ -34,9 +34,8 @@ module.exports = {
                 loader: 'html-loader'
             },
             {
-                test:/\.css$/,
-                include: path.resolve(__dirname, 'src/styles'),
-                loader: 'raw-loader'
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
             }
        ]
     },

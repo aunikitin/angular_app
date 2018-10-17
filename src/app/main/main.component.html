@@ -1,5 +1,6 @@
-<nav-comp *ngIf = 'isAuthorized'
-    (isAuthorized) = "authorizeChanged($event)"></nav-comp>
-<div style="margin-left: 50px">
+<nav-comp class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf = 'isAuthorized'
+    (isAuthorized) = "authorizeChanged($event)">
+</nav-comp>
+<div style="padding-top:25px" class="container">
     <router-outlet></router-outlet>
 </div>

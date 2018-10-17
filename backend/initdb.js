@@ -2,9 +2,12 @@ var csvtojson = require("csvtojson");
 var Vulnerability = require("./models/vulnerability");
 var User = require('./models/user');
 var connectionManager = require('./models/connectionManager');
+var ModelBuilder = require('./services/modelBuilder');
 
 async function seedData() {
     const sequelize = connectionManager.sequelize;
+    const modelBuilder = new ModelBuilder();
+    modelBuilder.buildModels();
     connectionManager.connect();
     const dataPath = `F:\\University\\5 курс\\Борисенко 5 курс\\superProtectedApp\\backend\\db.csv`;
     const data = await csvtojson({

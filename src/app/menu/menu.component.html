@@ -1,17 +1,12 @@
-<div *ngIf='isAuthorized' style='position:absolute; top:0; left:0; width: 100%; background-color: currentColor'>
-    <ul style='display:flex' class="nav">
-        <li class="nav-item">
-            <a routerLink="/">Main</a>
-        </li>
-        <li class="nav-item">
-                <a routerLink="/vulnerabilities">Vulnerabilities</a>
-            </li>
-        <li *ngIf='isAdmin' class="nav-item">
-            <a routerLink="/users">Users</a>
-        </li>
-        <li сlass="nav-item">
-            <a (click)="logOut()">Log Out</a>
-        </li>
-    </ul>
-</div>
-<hr *ngIf='isAuthorized'>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" *ngIf='isAuthorized'>
+    <a class="navbar-brand" routerLink="/">
+        <img src="/favicon.ico" width="25" height="25" class="d-inline-block align-top" alt="">
+        Main
+    </a>
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/vulnerabilities">Vulnerabilities</a>
+        <a class="nav-item nav-link" routerLink="/chat">Chat</a>
+        <a class="nav-item nav-link" routerLink="/users">Users</a>
+        <a class="nav-item nav-link" routerLink (click)="logOut()">Log Out</a>
+    </div>
+</nav>
