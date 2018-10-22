@@ -3,11 +3,11 @@ import Channel from '../../models/chat/channel';
 import { ChannelService } from '../../services/channel.service';
      
 @Component({
-    selector: 'label-comp',
-    templateUrl: './chatLabel.component.html',
+    selector: 'message-comp',
+    templateUrl: './message .component.html',
     providers: [ChannelService]
 })
-export class ChatLabelComponent implements OnInit { 
+export class MessageComponent implements OnInit { 
     constructor(private channelService: ChannelService){}
 
     @Input() channel: Channel;

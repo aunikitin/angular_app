@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit{
     @Output() isAuthorized = new EventEmitter(true)
 
     ngOnInit(){
-        this.isAdmin = parseInt(window.localStorage.getItem("access-level")) == 0;
+        this.isAdmin = this.authService.currentUser.accessLevel == 0;
     }
 
     logOut(){

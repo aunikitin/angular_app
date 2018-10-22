@@ -16,7 +16,21 @@ const server = http.createServer(requestHandler);
 const io = socket(server);
 
 io.on('connect', (socket) => {
-    console.log('a user connected');
+    socket.on('message', (msg) =>{
+        if(msg.hasOwnProperty("action")){
+            socket.broadcast.to(socket.id).emit('server message: ', msg.text);
+        }else{
+            socket.broadcast.to(socket.id).emit('message', msg.text);
+        }
+        io.emit('message', {'msg': msg.text});
+    });
+    socket.on('room', (room) => {
+        socket.join(room);
+    });
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
+    console.log('User connected');
 });
 
 io.on('disconnect', () => {

@@ -3,7 +3,13 @@ var defaultOptions = require('../config');
 var userRepository = require('../repository/userRepository');
 
 function getToken(user){
-    var token = jwt.sign({ id: user.id }, defaultOptions.secret, {expiresIn : defaultOptions.expiresIn});
+    var token = jwt.sign({ 
+        id: user.id 
+    }, 
+    defaultOptions.secret, 
+    {
+        expiresIn : defaultOptions.expiresIn
+    });
     var response = {
         auth: true,
         token: token
@@ -32,7 +38,12 @@ function authorizeUser(req, res, parentCallback){
                 return;
             }else{
                 var result = getToken(user);
-                result.accessLevel = user.accessLevel;
+                result.user = {
+                    login: user.login,
+                    email: user.email,
+                    accessLevel: user.accessLevel,
+                    channels: user.channels
+                };
                 parentCallback(null, result);
             }
         });

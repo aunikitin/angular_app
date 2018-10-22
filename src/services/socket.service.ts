@@ -4,7 +4,7 @@ import { Observable, Observer } from 'rxjs';
 import Message from '../models/chat/message';
 import { Event } from '../models/chat/event';
 
-import * as socketIo from 'socket.io-client';
+import * as io from 'socket.io-client';
 
 const SERVER_URL = 'http://localhost:3000';
 
@@ -13,7 +13,7 @@ export class SocketService {
     private socket;
 
     public initSocket(): void {
-        this.socket = socketIo(SERVER_URL);
+        this.socket = io(SERVER_URL);
     }
 
     public send(message: Message): void {
@@ -22,7 +22,9 @@ export class SocketService {
 
     public onMessage(): Observable<Message> {
         return new Observable<Message>(observer => {
-            this.socket.on('message', (data: Message) => observer.next(data));
+            this.socket.on('message', (data: Message) => {
+                observer.next(data);
+            });
         });
     }
 

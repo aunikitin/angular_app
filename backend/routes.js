@@ -3,6 +3,8 @@ var connectionController = require('./controllers/connectionController');
 var homeController = require('./controllers/homeController');
 var authController = require('./controllers/authController');
 var userController = require('./controllers/userController');
+var chatController = require('./controllers/chatController');
+var messageController = require('./controllers/messageController');
 const querystring = require('querystring');
 
 module.exports = {
@@ -20,6 +22,9 @@ module.exports = {
    
         if(httpVerb == 'GET'){
             switch (url){
+                case '/api/message/getMessages':
+                    messageController.getMessages(req, res, params);
+                    break;
                 case '/api/data/getById':
                     dataController.getById(req, res, params);
                     break;
@@ -31,6 +36,9 @@ module.exports = {
                     break;
                 case '/api/user/getUsers':
                     userController.getUsers(req, res, params);
+                    break;
+                case '/api/chat/getChannels':
+                    chatController.getChannels(req, res, params);
                     break;
                 case '/public/app.js':
                     homeController.app(req, res);
@@ -69,6 +77,9 @@ module.exports = {
                 case '/api/user/update':
                     userController.updateUser(req, res);
                     break;
+                case '/api/channel/add':
+                    chatController.addChannel(req, res);
+                    break;
                 default:
                     res.end();
                     break;
@@ -78,6 +89,9 @@ module.exports = {
             switch(url){
                 case '/api/user/delete':
                     userController.deleteUser(req, res, params);
+                    break;
+                case '/api/channel/delete':
+                    chatController.deleteChannel(req, res, params);
                     break;
                 default:
                     res.end();

@@ -3,7 +3,7 @@
         [pages]="pages"
         (outputLimit) = "limitChange($event)"
         (outputPage) = "pageChange($event)"></paging-comp>
-    <table class="table table-striped">
+    <table style="width: 90%" class="table table-striped">
         <thead>
             <tr>
                 <th *ngFor="let property of properties">

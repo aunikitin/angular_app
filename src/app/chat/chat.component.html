@@ -1,22 +1,32 @@
 <div style="height: 85%" class="container">
     <div class="row">
         <div class="col-4">
-            <div class="card" style="height:100%">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
+            <div class="card" style="height:100%; overflow: auto">
+                <div class="list-group-item">
+                    <input style="width: 75%; display: inline-block" type="search" class="form-control ds-input" placeholder="Search..."
+                        [(ngModel)]="name"
+                        (change)="nameChanged($event.target.value)">
+                    <button style="float: right" type="button" class="btn btn-outline-primary"
+                        (click)="openAddChannelDialog()">Add</button>
+                </div>
+                <div *ngFor = "let channel of channels">
+                    <label-comp
+                        [channel]="channel"
+                        (needUpdate)="refresh()"
+                        (channelToLoad)="openChannel($event)">
+                    </label-comp>
+                </div>
             </div>
         </div>
         <div class="col-8">
-            <div style="height:100%" class="card">
-                <h5 class="card-header">Featured</h5>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+            <div style="height:100%">
+                <conversation-comp style="height: 100%"
+                    (needCreateNewRoom)="openAddChannelDialog()"
+                    (messageContent)="sendMessage($event)"
+                    [channel]="channel"
+                    [messages]="messages"
+                    [channelName]="channelName">
+                </conversation-comp>
             </div>
         </div>
     </div>

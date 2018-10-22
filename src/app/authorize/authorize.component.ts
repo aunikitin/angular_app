@@ -1,5 +1,4 @@
 import { Component, OnInit, TemplateRef, ViewChild, Output, EventEmitter } from '@angular/core';
-import { ConnectionService } from '../../services/connection.service'
 import { AuthService } from '../../services/auth.service';
 import User from '../../models/user'
 import { Router } from '@angular/router';
@@ -7,10 +6,10 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'auth-comp',
     templateUrl: './authorize.component.html',
-    providers: [ConnectionService]
+    providers: []
 })
 export class AuthorizeComponent implements OnInit {
-    constructor( private connectionService: ConnectionService, private authService: AuthService, private router: Router){}
+    constructor(private authService: AuthService, private router: Router){}
 
     @ViewChild('authTemplate') authTemplate: TemplateRef<any>;
     @ViewChild('registerTemplate') registerTemplate: TemplateRef<any>;
@@ -73,11 +72,11 @@ export class AuthorizeComponent implements OnInit {
 
     authorize(){
         const user = new User(null, this.login, this.password, this.email, null);
-        this.authService.authorize(user).subscribe((result: {auth: boolean, token: string, accessLevel: number}) => {
+        this.authService.authorize(user).subscribe((result: {auth: boolean, token: string, user: User}) => {
             if(result.auth){
                 this.bindMenu.emit(true);
                 window.localStorage.setItem('X-access-token', result.token);
-                window.localStorage.setItem('access-level', result.accessLevel.toString());
+                this.authService.currentUser = result.user;
                 this.router.navigate(['/']);
             }
         }, error =>{
@@ -88,11 +87,11 @@ export class AuthorizeComponent implements OnInit {
 
     register(){
         const user = new User(null, this.login, this.password, this.email, null);
-        this.authService.register(user).subscribe((result: {auth: boolean, token: string, accessLevel: number}) => {
+        this.authService.register(user).subscribe((result: {auth: boolean, token: string, user: User}) => {
             if(result.auth){
                 this.bindMenu.emit(true);
                 window.localStorage.setItem('X-access-token', result.token);
-                window.localStorage.setItem('access-level', result.accessLevel.toString());
+                this.authService.currentUser = result.user;
                 this.router.navigate(['/']);
             }
         }, error =>{

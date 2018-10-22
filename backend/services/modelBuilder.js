@@ -11,11 +11,17 @@ class ModelBuilder {
     }
 
     buildModels(){
-        Message.belongsTo(Channel);
-        Message.belongsTo(User);
-        Channel.hasMany(Message);  
-        Channel.belongsTo(User);
-        User.hasMany(Channel);
+        Message.Channel = Message.belongsTo(Channel);
+        Channel.Messages = Channel.hasMany(Message);
+
+        Message.User = Message.belongsTo(User);
+        User.Messages = User.hasMany(Message);
+
+        Channel.Vulnerability = Channel.belongsTo(Vulnerability);
+        Vulnerability.Channels = Vulnerability.hasMany(Channel);
+
+        Channel.Users = Channel.belongsToMany(User, {through: "ChannelUser"});
+        User.Channels = User.belongsToMany(Channel, {through: "ChannelUser"});
     }
 }
 

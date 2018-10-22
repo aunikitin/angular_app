@@ -3,7 +3,6 @@ import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class UserService{
-  
     constructor(private http: HttpClient){ }
       
     getById(id: string){
@@ -16,7 +15,7 @@ export class UserService{
         let params = new HttpParams();
         params = params.append('limit', limit);
         params = params.append('offset', offset);
-        if(filterObject != null){
+        if(!(filterObject == null || filterObject == undefined)){
             for(const property in filterObject){
                 if(filterObject[property] != null || filterObject[property] != ''){
                     params = params.append(property, filterObject[property]);

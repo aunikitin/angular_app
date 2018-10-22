@@ -7,8 +7,8 @@ function findById(id){
 }
 
 function getUsers(params){
-    const limit = params.limit ? params.limit: defaultSettings.defaultDataLimit;
-    const offset = params.offset ? params.offset: defaultSettings.defaultOffset;
+    const limit = params.limit && params.limit!="null" ? params.limit: defaultSettings.defaultDataLimit;
+    const offset = params.offset && params.offset!="null" ? params.offset: defaultSettings.defaultOffset;
     let filter = {};
     delete params.limit;
     delete params.offset;
@@ -26,7 +26,14 @@ function getUsers(params){
             }
         }
     }
-    return User.findAndCountAll({limit, offset, where: filter});
+    return User.findAndCountAll({
+        limit, 
+        offset, 
+        where: filter,
+        attributes: {
+            exclude: ['password']
+        }
+    });
 }
 
 function update(params){

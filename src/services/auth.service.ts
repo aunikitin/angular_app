@@ -5,6 +5,7 @@ import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService{
+    currentUser: User; // TODO: убрать
   
     constructor(private http: HttpClient){ }
    
@@ -16,6 +17,7 @@ export class AuthService{
         return this.http.post('/api/auth', user);
     }
 
+    // TODO: убрать
     haveAllRights(){
         return parseInt(window.localStorage.getItem("access-level")) > 0;
     }

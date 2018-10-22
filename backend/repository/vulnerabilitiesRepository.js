@@ -6,6 +6,15 @@ function findById(id){
     return Vulnerability.findById(id);
 }
 
+function getOne(params){
+    const filterObject = {
+        identifier: {
+            [Op.iLike]: `%${params}%`
+        }
+    };
+    return Vulnerability.findOne({where: filterObject});
+}
+
 function getData(params){
     const limit = params.limit ? params.limit: defaultSettings.defaultDataLimit;
     const offset = params.offset ? params.offset: defaultSettings.defaultOffset;
@@ -25,5 +34,6 @@ function getData(params){
 
 module.exports = {
     findById: findById,
-    getData: getData
+    getData: getData,
+    getOne: getOne
 }

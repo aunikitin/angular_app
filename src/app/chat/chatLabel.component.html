@@ -1,0 +1,13 @@
+<div class="card" (click)="loadChannel()">
+    <h6 class="card-header">{{chatName}}
+        <span style="font-size: small; float:right">{{messageTime}}</span>
+        <button type="button" class="close" aria-label="Close"
+            (click)="deleteChannel()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </h6>
+    <div class="card-body">
+        <h6 class="card-title">{{chatTopic}}</h6>
+        <p class="card-text">{{lastMessage}}</p>
+    </div>
+</div>

@@ -10,19 +10,11 @@ const Message = sequelize.define('message', {
         defaultValue: DataTypes.UUIDV1
     },
     text: DataTypes.TEXT,
-    channel_id: {
-        allowNull: false,
-        type: DataTypes.INTEGER
-    },
-    user_id: {
-        type: DataTypes.INTEGER
-    },
     // Timestamps
     updatedAt: DataTypes.DATE,
-    createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false
-    }
+    createdAt: DataTypes.DATE
+    //many to one channel
+    //many to one user
 }); 
 
 module.exports = Message;

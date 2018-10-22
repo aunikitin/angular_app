@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {Routes, RouterModule} from '@angular/router';
 
@@ -20,12 +20,20 @@ import { UserComponent } from './user/user.component';
 import { IndexComponent } from './main/index.component';
 import { SocketService } from '../services/socket.service';
 import { ChatComponent } from './chat/chat.component';
+import { ChatLabelComponent } from './chat/chatLabel.component';
+import { ConversationComponent } from './chat/conversation.component';
+import { NewChannelComponent } from './chat/newChannel.component';
+import {
+    MatDialogModule,
+    MatSelectModule,
+  } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // определение маршрутов
 const appRoutes: Routes =[
     { path: '', redirectTo: 'index', pathMatch: 'full'},
     { path: 'index', component: IndexComponent, canActivate: [AuthGuard]},
-    { path: 'chat', component: ChatComponent },
+    { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
     { path: 'users', component: UserComponent, canActivate: [AuthGuard, AccessGuard]},
     { path: 'vulnerabilities', component: TableComponent, canActivate: [AuthGuard]},
     { path: 'login', component: AuthorizeComponent},
@@ -39,7 +47,16 @@ export const httpInterceptorProviders = [
 ];
 
 @NgModule({
-    imports:      [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes, {enableTracing: true}) ],
+    imports:      [ 
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule.forRoot(appRoutes, {enableTracing: true}),
+        MatDialogModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+    ],
     declarations: [ 
         AppComponent, 
         TableComponent, 
@@ -51,14 +68,22 @@ export const httpInterceptorProviders = [
         PagingComponent,
         UserComponent,
         IndexComponent,
-        ChatComponent],
+        ChatComponent,
+        ChatLabelComponent,
+        ConversationComponent,
+        NewChannelComponent
+    ],
     bootstrap:    [ AppComponent ],
     providers:    [
         AuthService,
         httpInterceptorProviders,
         AuthGuard,
         AccessGuard,
-        SocketService]
+        SocketService
+    ],
+    entryComponents: [
+        NewChannelComponent
+    ]
 })
 
 export class AppModule { }

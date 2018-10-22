@@ -9,15 +9,17 @@ const Channel = sequelize.define('channel', {
         primaryKey: true,
         autoIncrement: true
     },
-    user_id: {
-        type: DataTypes.INTEGER
+    name: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        unique: true
     },
     // Timestamps
     updatedAt: DataTypes.DATE,
-    createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false
-    }
+    createdAt: DataTypes.DATE
+    //Many to many user
+    //Many to one vulnerability
+    //One to many messages
 });
 
 module.exports = Channel;

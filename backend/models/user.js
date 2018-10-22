@@ -12,7 +12,7 @@ const User = sequelize.define('user', {
     login: {
         type:DataTypes.TEXT,
         unique: true
-    }, 
+    },
     email: DataTypes.TEXT, 
     password: DataTypes.TEXT,
     accessLevel: {
@@ -20,6 +20,8 @@ const User = sequelize.define('user', {
         allowNull: false,
         defaultValue: 1
     }
+    //many to many channel
+    //one to many messages
 });
 
 module.exports = User;

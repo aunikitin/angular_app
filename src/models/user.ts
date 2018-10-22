@@ -1,11 +1,12 @@
 import { throwError } from "rxjs";
+import Channel from "./chat/channel";
 
 export default class User {
     id: number;
     login: string = "";
     password: string;
     email: string = "";
-    accessLevel: Custom.AccessLevel
+    accessLevel: Custom.AccessLevel;
 
     constructor(id, login, password, email, accessLevel){
         if(id){

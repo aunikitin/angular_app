@@ -8,11 +8,14 @@
         "client": "webpack --watch"
     },
     "dependencies": {
+        "@angular/animations": "^7.0.0",
+        "@angular/cdk": "^6.4.7",
         "@angular/common": "^6.1.8",
         "@angular/compiler": "^6.1.8",
         "@angular/core": "^6.1.8",
         "@angular/forms": "^6.1.8",
-        "@angular/platform-browser": "^6.1.8",
+        "@angular/material": "^7.0.0",
+        "@angular/platform-browser": "^6.1.10",
         "@angular/platform-browser-dynamic": "^6.1.8",
         "@angular/router": "^6.1.8",
         "bootstrap": "^4.1.3",
@@ -32,16 +35,18 @@
         "@types/jwt-decode": "^2.2.1",
         "@types/node": "^10.11.4",
         "@types/socket.io": "^1.4.38",
+        "@types/uuid": "^3.4.4",
+        "@types/sequelize": "^4.27.28",
         "angular2-template-loader": "^0.6.2",
         "awesome-typescript-loader": "^5.2.1",
+        "css-loader": "^1.0.0",
         "csvtojson": "^2.0.8",
         "html-loader": "^0.5.5",
         "raw-loader": "^0.5.1",
+        "style-loader": "^0.23.1",
         "supervisor": "^0.12.0",
         "typescript": "^3.0.3",
         "webpack": "^4.20.2",
-        "webpack-cli": "^3.1.2",
-        "style-loader": "^0.23.1",
-        "css-loader": "^1.0.0"
+        "webpack-cli": "^3.1.2"
     }
 }

@@ -1,0 +1,38 @@
+<div class="card" style="height: 100%">
+    <ng-template [ngTemplateOutlet]="loadTemplate()"></ng-template>
+</div>
+
+<ng-template #chatTemplate>
+    <h5 class="card-header">{{channel.name}}</h5>
+    <div class="card-body">
+    </div>
+    <div class="card-footer text-muted">
+        <input style="width: 90%; display: inline-block" type="search" class="form-control ds-input" placeholder="Enter something..."
+            [(ngModel)]="messageText">
+        <button style="float: right" type="button" class="btn btn-outline-primary"
+            (click)="sendMessage($event.target.value)">Send</button>
+    </div>
+</ng-template>
+
+<ng-template #withoutMessagesTemplate>
+    <h5 class="card-header">{{channel.name}}</h5>
+    <div style="text-align: center" class="card-body">
+        <p>Create new message</p>
+    </div>
+    <div class="card-footer text-muted">
+        <input style="width: 90%; display: inline-block" type="search" class="form-control ds-input" placeholder="Enter something..."
+            [(ngModel)]="messageText">
+        <button style="float: right" type="button" class="btn btn-outline-primary"         
+            (click)="sendMessage($event.target.value)">Send</button>
+    </div>
+</ng-template>
+
+<ng-template #emptyTemplate>
+    <h5 class="card-header">Nothing to show</h5>
+    <div class="card-body">
+        <h5 class="card-title">Actions</h5>
+        <p class="card-text">Now let's choose something to show or create new room</p>
+        <button class="btn btn-primary"
+            (click)="createRoom()">Create room</button>
+    </div>
+</ng-template>
