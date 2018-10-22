@@ -123,10 +123,30 @@ function deleteUser(req, res, params){
     authService.getUserFromToken(req, res, callback);
 }
 
+function getUserFromToken(req, res){
+    const callback = (err, user) => {
+        if(err){
+            errorService.writeErrorToHead(res, err, 401);
+            res.end();
+        }else{
+            const transportUser = {
+                login: user.login,
+                email: user.email,
+                accessLevel: user.accessLevel
+            }
+            res.writeHead(200);
+            res.write(JSON.stringify(transportUser));
+            res.end();
+        }
+    }
+    authService.getUserFromToken(req, res, callback);
+}
+
 module.exports = {
     registerNewUser: registerNewUser,
     createUser: createUser,
     getUsers: getUsers,
     deleteUser: deleteUser,
-    updateUser: updateUser
+    updateUser: updateUser,
+    getUserFromToken: getUserFromToken
 }

@@ -4,7 +4,12 @@
 
 <ng-template #chatTemplate>
     <h5 class="card-header">{{channel.name}}</h5>
-    <div class="card-body">
+    <div style="overflow: auto" class="card-body">
+        <message-comp 
+            *ngFor="let message of messages"
+            [message]="message"
+            [user]="user">
+        </message-comp>
     </div>
     <div class="card-footer text-muted">
         <input style="width: 90%; display: inline-block" type="search" class="form-control ds-input" placeholder="Enter something..."

@@ -6,7 +6,7 @@
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/vulnerabilities">Vulnerabilities</a>
         <a class="nav-item nav-link" routerLink="/chat">Chat</a>
-        <a class="nav-item nav-link" routerLink="/users">Users</a>
+        <a class="nav-item nav-link" routerLink="/users" *ngIf='isAdmin'>Users</a>
         <a class="nav-item nav-link" routerLink (click)="logOut()">Log Out</a>
     </div>
 </nav>

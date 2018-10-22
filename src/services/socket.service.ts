@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import Message from '../models/chat/message';
 import { Event } from '../models/chat/event';
+import { AuthService } from './auth.service';
 
 import * as io from 'socket.io-client';
 
@@ -10,6 +11,8 @@ const SERVER_URL = 'http://localhost:3000';
 
 @Injectable()
 export class SocketService {
+    constructor(private authService: AuthService){}
+
     private socket;
 
     public initSocket(): void {
@@ -17,7 +20,11 @@ export class SocketService {
     }
 
     public send(message: Message): void {
-        this.socket.emit('message', message);
+        const messagePackage = {
+            'message': message,
+            'x-access-token': this.authService.getToken()
+        };
+        this.socket.emit('message', messagePackage);
     }
 
     public onMessage(): Observable<Message> {

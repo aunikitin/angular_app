@@ -28,6 +28,7 @@ import {
     MatSelectModule,
   } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageComponent } from './chat/message.component';
 
 // определение маршрутов
 const appRoutes: Routes =[
@@ -71,7 +72,8 @@ export const httpInterceptorProviders = [
         ChatComponent,
         ChatLabelComponent,
         ConversationComponent,
-        NewChannelComponent
+        NewChannelComponent,
+        MessageComponent
     ],
     bootstrap:    [ AppComponent ],
     providers:    [

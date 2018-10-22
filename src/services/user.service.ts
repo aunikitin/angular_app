@@ -11,6 +11,10 @@ export class UserService{
         return this.http.get('/api/user/getById', { params: params }); 
     }
 
+    getUserFromToken(){
+        return this.http.get('/api/user/getUserFromToken'); 
+    }
+
     getUsers(limit, offset, filterObject){
         let params = new HttpParams();
         params = params.append('limit', limit);

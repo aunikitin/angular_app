@@ -34,6 +34,9 @@ module.exports = {
                 case '/api/user/getById':
                     userController.getById(req, res, params);
                     break;
+                case '/api/user/getUserFromToken':
+                    userController.getUserFromToken(req, res);
+                    break;
                 case '/api/user/getUsers':
                     userController.getUsers(req, res, params);
                     break;

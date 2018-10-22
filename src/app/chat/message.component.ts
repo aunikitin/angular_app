@@ -1,39 +1,41 @@
-import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import Channel from '../../models/chat/channel';
-import { ChannelService } from '../../services/channel.service';
+import Message from '../../models/chat/message';
+import User from '../../models/user';
      
 @Component({
     selector: 'message-comp',
-    templateUrl: './message .component.html',
-    providers: [ChannelService]
+    templateUrl: './message.component.html',
+    providers: []
 })
 export class MessageComponent implements OnInit { 
-    constructor(private channelService: ChannelService){}
+    constructor(){}
+    @ViewChild('systemMessageTemplate') systemMessageTemplate: TemplateRef<any>;
+    @ViewChild('receivedMessageTemplate') receivedMessageTemplate: TemplateRef<any>;
+    @ViewChild('myMessagesTemplate') myMessagesTemplate: TemplateRef<any>;
 
-    @Input() channel: Channel;
-    @Output() needUpdate = new EventEmitter<boolean>(false);
-    @Output() channelToLoad = new EventEmitter<Channel>();
+    @Input() user: User;
+    @Input() message: Message;
 
-    chatName: string;
-    lastMessage: string;
-    messageTime: Date;
-    chatTopic: string;
+    isReceived: boolean;
+    isServerMessage: boolean;
 
     ngOnInit(){
-        this.chatName = this.channel.name;
-        if(this.channel.vulnerability){
-            this.chatTopic = this.channel.vulnerability.identifier;
+        if(this.message.user){
+            this.isReceived = this.user.login != this.message.user.login;
+        }else{
+            this.isServerMessage = true;
         }
     }
 
-    loadChannel(){
-        this.channelToLoad.emit(this.channel);
-    }
-
-    deleteChannel(){
-        this.channelService.deleteChannel(this.channel.id).subscribe(() => {
-            this.needUpdate.emit(true);
-        },
-        err => console.log(err))
+    chooseTemplate(){
+        if(this.isServerMessage){
+            return this.systemMessageTemplate;
+        }else{
+            if(this.isReceived){
+                return this.receivedMessageTemplate
+            }
+        }
+        return this.myMessagesTemplate;
     }
 }

@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, Input, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import Channel from '../../models/chat/channel';
-import Message from 'src/models/chat/message';
+import Message from '../../models/chat/message';
+import User from '../../models/user';
      
 @Component({
     selector: 'conversation-comp',
@@ -20,17 +21,18 @@ export class ConversationComponent implements OnInit{
     @Input() channel: Channel;
     @Input() channelName: string;
     @Input() messages: Message[];
+    @Input() user: User;
 
     messageText: string;
 
     currentTemplate: TemplateRef<any>;
 
-    ngOnInit(){
+    ngOnInit(){      
     }
 
     loadTemplate(){
         if(this.channelName != null && this.channelName !== undefined){
-            if(this.messages){
+            if(this.messages && this.messages.length > 0){
                 this.currentTemplate = this.chatTemplate;
                 return this.chatTemplate;
             }else{

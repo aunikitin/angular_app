@@ -12,7 +12,10 @@ const Message = sequelize.define('message', {
     text: DataTypes.TEXT,
     // Timestamps
     updatedAt: DataTypes.DATE,
-    createdAt: DataTypes.DATE
+    createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+    }
     //many to one channel
     //many to one user
 }); 

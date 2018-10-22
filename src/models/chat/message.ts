@@ -6,7 +6,7 @@ export default class Message {
     id?: any;
     text: string;
     channel: Channel;
-    user: User;
+    user?: User;
     action?: Action;
     // Timestamps
     updatedAt?: Date;

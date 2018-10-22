@@ -16,7 +16,10 @@ const Channel = sequelize.define('channel', {
     },
     // Timestamps
     updatedAt: DataTypes.DATE,
-    createdAt: DataTypes.DATE
+    createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+    }
     //Many to many user
     //Many to one vulnerability
     //One to many messages

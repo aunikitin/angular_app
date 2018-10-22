@@ -6,16 +6,16 @@ import Message from '../../models/chat/message';
 import User from '../../models/user';
 import { SocketService } from '../../services/socket.service';
 import Channel from '../../models/chat/channel';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { NewChannelComponent } from './newChannel.component';
-import { AuthService } from '../../services/auth.service';
 import { ChannelService } from '../../services/channel.service';
 import { MessageService } from '../../services/message.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'chat-comp',
     templateUrl: './chat.component.html',
-    providers: [AuthService, ChannelService, MessageService]
+    providers: [ChannelService, MessageService, UserService]
 })
 export class ChatComponent implements OnInit {
     action = Action;
@@ -30,9 +30,14 @@ export class ChatComponent implements OnInit {
     constructor(private socketService: SocketService, 
         private matDialog: MatDialog, 
         private channelService: ChannelService,
-        private messageService: MessageService) { }
+        private messageService: MessageService,
+        private userSerivce: UserService) { }
 
     ngOnInit(): void {
+        this.userSerivce.getUserFromToken().subscribe((user: User) => {
+            this.user = user;
+        },
+        err => console.log(err));
         this.initIoConnection();
         this.refresh();
     }
@@ -109,19 +114,10 @@ export class ChatComponent implements OnInit {
 
         if (action === Action.JOINED) {
             message = {
-                user: this.user,
                 action: action,
-                text: 'this.user.login' + ' joined channel',
+                text: this.user.login + ' joined channel',
                 channel: this.channel
             }
-        } else if (action === Action.RENAME) {
-            // message = {
-            //     action: action,
-            //     content: {
-            //         username: this.user.login,
-            //         previousUsername: params.previousUsername
-            //     }
-            // };
         }
 
         this.socketService.send(message);

@@ -1,0 +1,59 @@
+<ng-template [ngTemplateOutlet]="chooseTemplate()"></ng-template>
+
+<ng-template #systemMessageTemplate>
+
+</ng-template>
+
+<ng-template #receivedMessageTemplate>
+    <div style="margin:26px 0 26px;">
+        <div style="
+            display:inline-block; 
+            width:6%">
+            <img style="max-width:100%" src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+        </div>
+        <div style="
+            display:inline-block; 
+            width:92%; 
+            padding:0 0 0 10px; 
+            vertical-align: top">
+            <div style="width:57%">
+                <p style="
+                    background: #ebebeb none repeat scroll 0 0;
+                    border-radius: 5px;
+                    color: #646464;
+                    font-size: 14px;
+                    margin: 0;
+                    padding: 5px 10px 5px 12px;
+                    width: 100%;">{{message.text}}
+                </p>
+                <span style="
+                    color: #747474;
+                    display: block;
+                    font-size: 12px;
+                    margin: 8px 0 0;">{{message.createdAt}}
+                </span>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #myMessagesTemplate>
+    <div style="overflow:hidden; margin:26px 0 26px;">
+        <div style="float: right; width: 46%;">
+            <p style="
+                background: #05728f none repeat scroll 0 0;
+                border-radius: 5px;
+                font-size: 14px;
+                margin: 0; color:#fff;
+                padding: 5px 10px 5px 12px;
+                width:100%;">{{message.text}}
+            </p>
+            <span style="
+                color: #747474;
+                display: block;
+                font-size: 12px;
+                margin: 8px 0 0;">{{message.createdAt}}
+            </span>
+        </div>
+    </div>
+</ng-template>

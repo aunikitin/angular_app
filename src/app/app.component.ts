@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 @Component({
     selector: 'start-comp',
     templateUrl: './app.component.html',
-    providers: [ConnectionService, AuthService]
+    providers: [ConnectionService]
 })
 export class AppComponent {
     constructor(private authService: AuthService){}

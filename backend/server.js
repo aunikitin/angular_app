@@ -17,18 +17,11 @@ const io = socket(server);
 
 io.on('connect', (socket) => {
     socket.on('message', (msg) =>{
-        if(msg.hasOwnProperty("action")){
-            socket.broadcast.to(socket.id).emit('server message: ', msg.text);
+        if(msg.message.hasOwnProperty("action")){
+            io.emit('server message', msg.text);
         }else{
-            socket.broadcast.to(socket.id).emit('message', msg.text);
+            io.emit('message', msg.message);
         }
-        io.emit('message', {'msg': msg.text});
-    });
-    socket.on('room', (room) => {
-        socket.join(room);
-    });
-    socket.on('disconnect', () => {
-        console.log('User disconnected');
     });
     console.log('User connected');
 });

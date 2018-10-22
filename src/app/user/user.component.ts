@@ -8,7 +8,7 @@ import { SettingsService } from '../../services/settings.service';
 @Component({
     selector: 'user-comp',
     templateUrl: './user.component.html',
-    providers: [AuthService, UserService, SettingsService, ErrorService]
+    providers: [UserService, SettingsService, ErrorService]
 })
 export class UserComponent implements OnInit {
     constructor(private authService: AuthService, 
