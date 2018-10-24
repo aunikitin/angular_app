@@ -1,7 +1,17 @@
 <ng-template [ngTemplateOutlet]="chooseTemplate()"></ng-template>
 
 <ng-template #systemMessageTemplate>
-
+    <div style="text-align: center; padding: 5px 10px 5px 12px;">
+        <p style="
+            background: #ebebeb none repeat scroll 0 0;
+            border-radius: 5px;
+            color: #747474;
+            font-size: 12px;
+            margin: auto;
+            padding: 5px 10px 5px 12px;
+            width: 57%;">{{message.text}}
+        </p>  
+    </div> 
 </ng-template>
 
 <ng-template #receivedMessageTemplate>
@@ -30,7 +40,7 @@
                     color: #747474;
                     display: block;
                     font-size: 12px;
-                    margin: 8px 0 0;">{{message.createdAt}}
+                    margin: 8px 0 0;">{{message.createdAt | date: "hh:mm"}}
                 </span>
             </div>
         </div>
@@ -49,10 +59,11 @@
                 width:100%;">{{message.text}}
             </p>
             <span style="
+                float: right;
                 color: #747474;
                 display: block;
                 font-size: 12px;
-                margin: 8px 0 0;">{{message.createdAt}}
+                margin: 8px 0 0;">{{message.createdAt | date: "hh:mm"}}
             </span>
         </div>
     </div>

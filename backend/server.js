@@ -1,4 +1,5 @@
 var ModelBuilder = require('./services/modelBuilder');
+var messageService = require('./services/messageService');
 var router = require('./routes');
 var http = require('http');
 var socket = require('socket.io');
@@ -18,9 +19,13 @@ const io = socket(server);
 io.on('connect', (socket) => {
     socket.on('message', (msg) =>{
         if(msg.message.hasOwnProperty("action")){
-            io.emit('server message', msg.text);
-        }else{
             io.emit('message', msg.message);
+        }else{
+            messageService.saveMessage(msg).then((createTime) => {
+                msg.message.createdAt = createTime;
+                io.emit('message', msg.message);
+            },
+            err => console.log('message fail: '+ err));
         }
     });
     console.log('User connected');

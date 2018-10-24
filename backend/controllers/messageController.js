@@ -1,6 +1,6 @@
 var authService = require('../services/authService');
 var errorService = require('../services/errorService');
-var chatService = require('../services/chatService');
+var chatService = require('../services/channelService');
 
 function getMessages(req, res, params){
     const callback = (err, user) =>{

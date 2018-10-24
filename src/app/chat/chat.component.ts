@@ -45,7 +45,7 @@ export class ChatComponent implements OnInit {
     openAddChannelDialog(){
         const dialogRef = this.matDialog.open(NewChannelComponent, {
             width: '500px',
-            height: '500px'
+            height: '610px'
         });
     
         dialogRef.afterClosed().subscribe(() => {
@@ -70,7 +70,9 @@ export class ChatComponent implements OnInit {
 
         this.ioConnection = this.socketService.onMessage()
         .subscribe((message: Message) => {
-            this.messages.push(message);
+            if(message.channel.id == this.channel.id){
+                this.messages.push(message);
+            }
         });
 
         this.socketService.onEvent(Event.CONNECT)
@@ -97,12 +99,14 @@ export class ChatComponent implements OnInit {
     }
 
     public openChannel(channel: Channel){
-        this.channel = channel;
-        this.messageService.getMessages(channel.id.toString()).subscribe((data: Message[]) => {
-            this.messages = data;
-            this.channelName = channel.name;
-            this.sendNotification(null, Action.JOINED);
-        })
+        if(!(this.channel && this.channel.id == channel.id)) {
+            this.channel = channel;
+            this.messageService.getMessages(channel.id.toString()).subscribe((data: Message[]) => {
+                this.messages = data;
+                this.channelName = channel.name;
+                this.sendNotification(null, Action.JOINED);
+            })
+        }
     }
 
     public nameChanged(newName){

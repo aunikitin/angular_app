@@ -1,31 +1,40 @@
-<div *ngIf="vulnerabilities != null">
-    <paging-comp 
-        [pages]="pages"
-        (outputLimit) = "limitChange($event)"
-        (outputPage) = "pageChange($event)"></paging-comp>
-    <table style="width: 90%" class="table table-striped">
-        <thead>
-            <tr>
-                <th *ngFor="let property of properties">
-                    {{property}}
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td *ngFor = "let property of properties">
-                    <input type="text" class="form-control"
-                        contenteditable="true"
-                        [(ngModel)]="filterObject[property]" 
-                        attr.data-placeholder="{{property}}"
-                        (change)="filterChange($event.target.value)"/>
-                </td>
-            </tr>
-            <tr *ngFor="let vulnerability of vulnerabilities">
-                <td *ngFor="let property of properties">
-                    {{vulnerability[property]}}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container" *ngIf="vulnerabilities != null">
+    <div class="row">
+        <div class="col">
+            <paging-comp 
+                [pages]="pages"
+                (outputLimit) = "limitChange($event)"
+                (outputPage) = "pageChange($event)">
+            </paging-comp>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col">
+                <table style="width: 100%" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let property of properties">
+                                {{property}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td *ngFor = "let property of properties">
+                                <input type="text" class="form-control"
+                                    contenteditable="true"
+                                    [(ngModel)]="filterObject[property]" 
+                                    attr.data-placeholder="{{property}}"
+                                    (change)="filterChange($event.target.value)"/>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let vulnerability of vulnerabilities">
+                            <td *ngFor="let property of properties">
+                                {{vulnerability[property]}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 </div>

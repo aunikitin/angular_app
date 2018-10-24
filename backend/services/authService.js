@@ -50,8 +50,8 @@ function authorizeUser(req, res, parentCallback){
     });
 }
 
-function getUserFromToken(req, res, parentCallback){
-    var token = req.headers['x-access-token'];
+function getUserFromToken(req, res, parentCallback, receivedToken){
+    var token = receivedToken? receivedToken: req.headers['x-access-token'];
     if (!token) {
         parentCallback(new Error('Токен отсутствует'));
         return;

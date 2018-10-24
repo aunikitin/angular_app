@@ -1,6 +1,6 @@
 var authService = require('../services/authService');
 var errorService = require('../services/errorService');
-var chatService = require('../services/chatService');
+var channelService = require('../services/channelService');
 var bodyParser = require('../services/bodyParser');
 
 function addChannel(req, res){
@@ -12,7 +12,7 @@ function addChannel(req, res){
             }else{
                 const afterParseBody = (channel) => {
                     if(user.accessLevel < 1){
-                        chatService.addChannel(req, res, channel);
+                        channelService.addChannel(req, res, channel);
                         // .then(() =>{
                         //     res.writeHead(200);
                         //     res.end();
@@ -38,7 +38,17 @@ function getChannels(req, res, params){
             errorService.writeErrorToHead(res, err, 401);
             res.end();
         }else{
-            chatService.getChannels(params, user).then(data =>{
+            channelService.getChannels(params).then(data =>{
+                const result = [];
+                for(const channel of data.rows){
+                    for(const channelUser of channel.users){
+                        if(channelUser.id == user.id){
+                            result.push(channel);
+                            break;
+                        }
+                    }
+                }
+                data.rows = result;
                 res.write(JSON.stringify(data));
                 res.end();
             });
@@ -55,7 +65,7 @@ function deleteChannel(req, res, params){
         }else{
             if(user.accessLevel < 1){
                 const id = params.id;
-                chatService.deleteChannel(id).then(() =>{
+                channelService.deleteChannel(id).then(() =>{
                     res.writeHead(200);
                     res.end();
                 });

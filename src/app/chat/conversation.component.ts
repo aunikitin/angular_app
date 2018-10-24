@@ -14,6 +14,7 @@ export class ConversationComponent implements OnInit{
     @ViewChild('emptyTemplate') emptyTemplate: TemplateRef<any>;
     @ViewChild('chatTemplate') chatTemplate: TemplateRef<any>;
     @ViewChild('withoutMessagesTemplate') withoutMessagesTemplate: TemplateRef<any>;
+    @ViewChild('scrollMe') scrollMe: TemplateRef<any>;
 
     @Output() needCreateNewRoom = new EventEmitter<boolean>(false);
     @Output() messageContent = new EventEmitter<string>();
@@ -54,6 +55,12 @@ export class ConversationComponent implements OnInit{
         this.messageText = null;
         if(this.currentTemplate === this.withoutMessagesTemplate){
             this.loadTemplate();
+        }
+    }
+
+    onKey(event){
+        if(event.keyCode == 13 /**enter */){
+            this.sendMessage();
         }
     }
 }

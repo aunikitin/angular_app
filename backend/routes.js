@@ -3,7 +3,7 @@ var connectionController = require('./controllers/connectionController');
 var homeController = require('./controllers/homeController');
 var authController = require('./controllers/authController');
 var userController = require('./controllers/userController');
-var chatController = require('./controllers/chatController');
+var channelController = require('./controllers/channelController');
 var messageController = require('./controllers/messageController');
 const querystring = require('querystring');
 
@@ -40,8 +40,8 @@ module.exports = {
                 case '/api/user/getUsers':
                     userController.getUsers(req, res, params);
                     break;
-                case '/api/chat/getChannels':
-                    chatController.getChannels(req, res, params);
+                case '/api/channel/getChannels':
+                    channelController.getChannels(req, res, params);
                     break;
                 case '/public/app.js':
                     homeController.app(req, res);
@@ -81,7 +81,7 @@ module.exports = {
                     userController.updateUser(req, res);
                     break;
                 case '/api/channel/add':
-                    chatController.addChannel(req, res);
+                    channelController.addChannel(req, res);
                     break;
                 default:
                     res.end();
@@ -94,7 +94,7 @@ module.exports = {
                     userController.deleteUser(req, res, params);
                     break;
                 case '/api/channel/delete':
-                    chatController.deleteChannel(req, res, params);
+                    channelController.deleteChannel(req, res, params);
                     break;
                 default:
                     res.end();

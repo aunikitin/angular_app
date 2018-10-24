@@ -20,7 +20,7 @@ export class ChannelService{
                 }
             }
         }
-        return this.http.get('/api/chat/getChannels', { params: params });
+        return this.http.get('/api/channel/getChannels', { params: params });
     }
 
     addChannel(channel){

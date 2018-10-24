@@ -24,11 +24,6 @@ function getChannels(params, user){
             model: User,
             attributes: {
                 exclude: ['password', 'ChannelUser']
-            },
-            through: { 
-                where: {
-                    userId: user.id
-                }
             }
         },
         {
@@ -76,7 +71,13 @@ function getById(id){
             }
         },
         {
-            model: Message
+            model: Message,
+            include: [{
+                model: User,
+                attributes: {
+                    exclude: ['password', 'ChannelUser']
+                }
+            }]
         }]
     })
 }

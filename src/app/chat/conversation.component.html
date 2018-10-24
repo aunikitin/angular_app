@@ -4,7 +4,7 @@
 
 <ng-template #chatTemplate>
     <h5 class="card-header">{{channel.name}}</h5>
-    <div style="overflow: auto" class="card-body">
+    <div style="overflow: auto" class="card-body"  #scrollMe [scrollTop]="scrollMe.scrollHeight">
         <message-comp 
             *ngFor="let message of messages"
             [message]="message"
@@ -13,7 +13,8 @@
     </div>
     <div class="card-footer text-muted">
         <input style="width: 90%; display: inline-block" type="search" class="form-control ds-input" placeholder="Enter something..."
-            [(ngModel)]="messageText">
+            [(ngModel)]="messageText"
+            (keydown)="onKey($event)">
         <button style="float: right" type="button" class="btn btn-outline-primary"
             (click)="sendMessage($event.target.value)">Send</button>
     </div>
@@ -22,11 +23,20 @@
 <ng-template #withoutMessagesTemplate>
     <h5 class="card-header">{{channel.name}}</h5>
     <div style="text-align: center" class="card-body">
-        <p>Create new message</p>
+        <p style="
+            background: #ebebeb none repeat scroll 0 0;
+            border-radius: 5px;
+            color: #747474;
+            font-size: 12px;
+            margin: 0;
+            padding: 5px 10px 5px 12px;
+            width: 100%;">Create new message
+        </p>     
     </div>
     <div class="card-footer text-muted">
         <input style="width: 90%; display: inline-block" type="search" class="form-control ds-input" placeholder="Enter something..."
-            [(ngModel)]="messageText">
+            [(ngModel)]="messageText"
+            (keydown)="onKey($event)">
         <button style="float: right" type="button" class="btn btn-outline-primary"         
             (click)="sendMessage($event.target.value)">Send</button>
     </div>

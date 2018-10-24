@@ -4,14 +4,17 @@
             <h5 class="modal-title">Create new room</h5>
         </div>
         <div class="modal-body">
-            <input type="text" class="form-control"
+            <h6>Title</h6>
+            <input type="text" class="form-control" placeholder="Type chat name there"
                 contenteditable="true"
                 [(ngModel)]="channel.name"/>
             <br>
-            <input type="text" class="form-control"
+            <h6>Vulnerability</h6>
+            <input type="text" class="form-control" placeholder="Type vulnerability identifier there"
                 contenteditable="true"
                 [(ngModel)]="channel.vulnerability"/>
             <br>
+            <h6>Users</h6>
             <select class="form-control" 
                 [(ngModel)]="channel.users" multiple>
                 <option [value]="user" *ngFor="let user of users">{{user.login}}</option>
